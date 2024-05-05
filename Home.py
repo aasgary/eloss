@@ -20,13 +20,15 @@ def get_raster_value(lat, lon, raster_path):
             row, col = dataset.index(x, y)
             st.write(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
 
-            if (row >= 0 and row < dataset.height) and (col >= 0 and col < the dataset.width):
+            # Corrected the syntax error here:
+            if (row >= 0 and row < dataset.height) and (col >= 0 and col < dataset.width):
                 value = dataset.read(1)[row, col]
                 return value
             else:
                 return "Latitude and Longitude are out of the raster bounds."
     except Exception as e:
         return f"An error occurred: {str(e)}"
+
 
 # Streamlit widgets to accept inputs
 st.title("Raster Value Extraction Tool")
