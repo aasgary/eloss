@@ -80,7 +80,7 @@ def show_location_on_map(lat, lon):
 
 # Streamlit interface setup
 st.title("Raster Value and Location Viewer")
-raster_path = st.text_input("Enter the path to the raster file:", 'https://drive.google.com/file/d/1D2pASBmz3Q06d0vzY4o0cowRorTKqr-f/view?usp=sharing')
+raster_path = st.text_input("Enter the path to the raster file:", 'https://drive.google.com/file/d/1D2pASBmz3Q06d0vzY4o0cowRorTKqr-f/view?usp=drive_link')
 latitude = st.number_input("Enter latitude:", value=45.79)
 longitude = st.number_input("Enter longitude:", value=-74.0)
 if st.button('Get Raster Value and Show Location'):
