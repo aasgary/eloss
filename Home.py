@@ -1,8 +1,14 @@
-import streamlit as st
-import pydeck as pdk
+
 import rasterio
 from rasterio.transform import from_origin
-#from pyproj import Proj, Transformer
+from pyproj import Proj, Transformer
+import folium  # Import folium for mapping
+
+# Function to convert lat/lon to the coordinate system of the raster
+def latlon_to_xy(lat, lon, dataset):
+    transformer = Transformer.from_crs("epsg:4326", dataset.crs, always_xy=True)
+    x, y = transformer.transform(lon, lat)
+    return x, y
 
 # Function to get the raster value at a specific lat/lon
 def get_raster_value(lat, lon, raster_path):
@@ -23,54 +29,24 @@ def get_raster_value(lat, lon, raster_path):
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
-# Correctly format the URL with /vsicurl/ if confirmed it's direct
-def get_raster_value(lat, lon, raster_url):
-    try:
-        # Ensure URL is correctly prefixed for rasterio's remote capabilities
-        raster_url_corrected = f'/vsicurl/{raster_url}'
-        with rasterio.open(raster_url_corrected) as dataset:
-            print(f"Raster CRS: {dataset.crs}")
-            print(f"Width: {dataset.width}, Height: {dataset.height}")
+# Function to display the map with the marked location
+def show_map(lat, lon):
+    m = folium.Map(location=[lat, lon], zoom_start=13)  # Create a map centered around the coordinates
+    folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)  # Add a marker for the location
+    return m
 
-            x, y = latlon_to_xy(lat, lon, dataset)
-            row, col = dataset.index(x, y)
-            print(f"Row: {row}, Col: {col}")
+raster_path = 'canadapga4753min.tif'
+latitude = 56.23
+longitude = -117.29
 
-            if 0 <= row < dataset.height and 0 <= col < dataset.width:
-                value = dataset.read(1)[row, col]
-                return value
-            else:
-                return "Latitude and Longitude are out of the raster bounds."
-    except Exception as e:
-        return f"An error occurred: {str(e)}"
+value = get_raster_value(latitude, longitude, raster_path)
+print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
 
-# Adjust your usage accordingly
+# Show the map with the location
+map_display = show_map(latitude, longitude)
+map_display  # Display the map in the output cell
 
 
-# Adjust your usage accordingly
-
-
-def show_location_on_map(lat, lon):
-    # Define the map centered around the location
-    map_view = pdk.Deck(
-        map_style='mapbox://styles/mapbox/light-v9',
-        initial_view_state=pdk.ViewState(
-            latitude=lat,
-            longitude=lon,
-            zoom=11,
-            pitch=50,
-        ),
-        layers=[
-            pdk.Layer(
-                'ScatterplotLayer',
-                data=[{'position': [lon, lat], 'size': 200}],
-                get_position='position',
-                get_color=[180, 0, 200, 140],
-                get_radius='size',
-            ),
-        ],
-    )
-    st.pydeck_chart(map_view)
 
 # Streamlit interface setup
 st.title("Raster Value and Location Viewer")
