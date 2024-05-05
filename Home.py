@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
