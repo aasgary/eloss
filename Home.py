@@ -47,6 +47,12 @@ def show_map(lat, lon):
     map_html = m._repr_html_()
     st.components.v1.html(map_html, height=500)
 
+# Streamlit interface setup
+st.title("Raster Value and Location Viewer")
+raster_path = st.text_input("Enter the path to the raster file:", 'path_to_your_raster_file.tif')
+latitude = st.number_input("Enter latitude:", value=56.23)
+longitude = st.number_input("Enter longitude:", value=-117.29)
+
 # And then call this in your Streamlit app
 if st.button('Get Raster Value and Show Location'):
     value = get_raster_value(latitude, longitude, raster_path)
