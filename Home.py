@@ -10,16 +10,20 @@ def latlon_to_xy(lat, lon, dataset):
     x, y = transformer.transform(lon, lat)
     return x, y
 
-# Function to get the raster value at a specific lat/lon
-def get_raster_value(lat, lon, raster_path):
+import rasterio
+
+# Correctly format the URL with /vsicurl/ if confirmed it's direct
+def get_raster_value(lat, lon, raster_url):
     try:
-        with rasterio.open(raster_path) as dataset:
-            st.write(f"Raster CRS: {dataset.crs}")
-            st.write(f"Width: {dataset.width}, Height: {dataset.height}")
+        # Ensure URL is correctly prefixed for rasterio's remote capabilities
+        raster_url_corrected = f'/vsicurl/{raster_url}'
+        with rasterio.open(raster_url_corrected) as dataset:
+            print(f"Raster CRS: {dataset.crs  
+            print(f"Width: {dataset.width}, Height: {dataset.height}")
 
             x, y = latlon_to_xy(lat, lon, dataset)
             row, col = dataset.index(x, y)
-            st.write(f"Row: {row}, Col: {col}")
+            print(f"Row: {row}, Col: {col}")
 
             if 0 <= row < dataset.height and 0 <= col < dataset.width:
                 value = dataset.read(1)[row, col]
@@ -28,6 +32,9 @@ def get_raster_value(lat, lon, raster_path):
                 return "Latitude and Longitude are out of the raster bounds."
     except Exception as e:
         return f"An error occurred: {str(e)}"
+
+# Adjust your usage accordingly
+
 
 def show_location_on_map(lat, lon):
     # Define the map centered around the location
