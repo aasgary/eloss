@@ -19,8 +19,8 @@ with st.expander("See source code"):
     with st.echo():
 
         m = leafmap.Map(center=[40, -100], zoom=4)
-        cities = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
-        regions = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_regions.geojson"
+        cities = "https://drive.google.com/file/d/1u7JtMQF44TLAlwsgx-JlnWim-DL1VtGr/view?usp=sharing"
+        regions = "https://drive.google.com/file/d/12-n6NBudQNypdbc3rVaDgnmbH16Yb0wX/view?usp=drive_link"
 
         m.add_geojson(regions, layer_name="US Regions")
         m.add_points_from_xy(
