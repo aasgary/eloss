@@ -33,7 +33,7 @@ def get_raster_value(lat, lon, raster_path):
 
 # Streamlit widgets to accept inputs
 st.title("Raster Value Extraction Tool")
-raster_path = st.text_input("Enter the path to the raster file:", 'https://github.com/aasgary/eloss/blob/6a0f0d48854c7a89db7a02d81b23f917b2d318bc/canada_v2023_1_pga_475_rock_3min.tif')
+raster_path = st.text_input("Enter the path to the raster file:", 'https://github.com/aasgary/eloss/blob/82d7f67ebfcbae3de6504374a65aa7063a45e482/canadapga4753min.tif')
 latitude = st.number_input("Enter the latitude:", value=56.23)
 longitude = st.number_input("Enter the longitude:", value=-117.29)
 
