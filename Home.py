@@ -1,40 +1,40 @@
 import streamlit as st
-import leafmap.foliumap as leafmap
+import rasterio
+from rasterio.transform import from_origin
+from pyproj import Proj, Transformer
 
-st.set_page_config(layout="wide")
+# Function to convert lat/lon to the coordinate system of the raster
+def latlon_to_xy(lat, lon, dataset):
+    transformer = Transformer.from_crs("epsg:4326", dataset.crs, always_xy=True)
+    x, y = transformer.transform(lon, lat)
+    return x, y
 
-# Customize the sidebar
-markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
-"""
+# Function to get the raster value at a specific lat/lon
+def get_raster_value(lat, lon, raster_path):
+    try:
+        with rasterio.open(raster_path) as dataset:
+            st.write(f"Raster CRS: {dataset.crs}")
+            st.write(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
 
-st.sidebar.title("About")
-st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
-st.sidebar.image(logo)
+            x, y = latlon_to_xy(lat, lon, dataset)
+            row, col = dataset.index(x, y)
+            st.write(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
 
-# Customize page title
-st.title("Streamlit for Geospatial Applications")
+            if (row >= 0 and row < dataset.height) and (col >= 0 and col < the dataset.width):
+                value = dataset.read(1)[row, col]
+                return value
+            else:
+                return "Latitude and Longitude are out of the raster bounds."
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
-st.markdown(
-    """
-    This multipage app template demonstrates various interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). It is an open-source project and you are very welcome to contribute to the [GitHub repository](https://github.com/opengeos/streamlit-map-template).
-    """
-)
+# Streamlit widgets to accept inputs
+st.title("Raster Value Extraction Tool")
+raster_path = st.text_input("Enter the path to the raster file:", 'v2023_1_pga_475_rock_3min.tif')
+latitude = st.number_input("Enter the latitude:", value=56.23)
+longitude = st.number_input("Enter the longitude:", value=-117.29)
 
-st.header("Instructions")
-
-markdown = """
-1. For the [GitHub repository](https://github.com/opengeos/streamlit-map-template) or [use it as a template](https://github.com/opengeos/streamlit-map-template/generate) for your own project.
-2. Customize the sidebar by changing the sidebar text and logo in each Python files.
-3. Find your favorite emoji from https://emojipedia.org.
-4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
-
-"""
-
-st.markdown(markdown)
-
-m = leafmap.Map(minimap_control=True)
-m.add_basemap("OpenTopoMap")
-m.to_streamlit(height=500)
+# Button to trigger raster value reading
+if st.button('Get Raster Value'):
+    value = get_raster_value(latitude, longitude, raster_path)
+    st.write(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
