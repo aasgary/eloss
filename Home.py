@@ -5,11 +5,11 @@ import folium
 
 # Define the flood types and their corresponding raster paths
 flood_rasters = {
-    "Flood 25": "https://drive.google.com/file/d/18jUhSQhjEpdRGibaDDhUNWM0ZqiZnn3g/view?usp=drive_link",
-    "Flood 50": "https://drive.google.com/file/d/15gCHhJEQxr0PcT6wqfYs3VSFEB4fSMUu/view?usp=drive_link",
-    "Flood 100": "https://drive.google.com/file/d/1F_Jg4lv0BIt-NMtOp1kDsQLZIvJyT4uc/view?usp=drive_link",
-    "Flood 150": "https://drive.google.com/file/d/1TiyhSUzzbpvl0uPePd2lOYyBKMNY7c-K/view?usp=drive_link",
-    "Flood 200": "https://drive.google.com/file/d/1t6phb3FNfo5IZUP8fDYU6ZaQvg5RZ9Nl/view?usp=drive_link",
+    "Flood 25": "https://drive.google.com/file/d/1iLEuzYRML8Kb9qrPnXZppEuQS0D-68gy/view?usp=drive_link",
+    "Flood 50": "https://drive.google.com/file/d/1z0ilA-WhpXa7-GhbC0jzGQiEiUS2yBXL/view?usp=drive_link",
+    #"Flood 100": "https://drive.google.com/file/d/1F_Jg4lv0BIt-NMtOp1kDsQLZIvJyT4uc/view?usp=drive_link",
+    #"Flood 150": "https://drive.google.com/file/d/1TiyhSUzzbpvl0uPePd2lOYyBKMNY7c-K/view?usp=drive_link",
+    #"Flood 200": "https://drive.google.com/file/d/1t6phb3FNfo5IZUP8fDYU6ZaQvg5RZ9Nl/view?usp=drive_link",
 }
 
 # Function definitions remain the same
