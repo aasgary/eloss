@@ -4,12 +4,6 @@ import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
 
-# Function to convert lat/lon to the coordinate system of the raster
-def latlon_to_xy(lat, lon, dataset):
-    transformer = Transformer.from_crs("epsg:4326", dataset.crs, always_xy=True)
-    x, y = transformer.transform(lon, lat)
-    return x, y
-
 # Function to get the raster value at a specific lat/lon
 def get_raster_value(lat, lon, raster_path):
     try:
