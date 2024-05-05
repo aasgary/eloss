@@ -41,6 +41,6 @@ value = get_raster_value(latitude, longitude, raster_path)
 print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
 
 # Show the map with the location
-# map_display = show_map(latitude, longitude)
+ map_display = show_map(latitude, longitude)
 # map_display  # Display the map in the output cell
 
