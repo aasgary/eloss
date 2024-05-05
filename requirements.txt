@@ -4,4 +4,3 @@ leafmap
 owslib
 streamlit
 rasterio
-rasterio pyproj
