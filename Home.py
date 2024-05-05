@@ -32,12 +32,6 @@ def get_raster_value(lat, lon, raster_path):
 
 
 
-# Show the map with the location
-map_display = show_map(latitude, longitude)
-map_display  # Display the map in the output cell
-
-
-
 # Streamlit interface setup
 st.title("Raster Value and Location Viewer")
 raster_path = st.text_input("Enter the path to the raster file:", 'https://drive.google.com/file/d/1D2pASBmz3Q06d0vzY4o0cowRorTKqr-f/view?usp=drive_link')
