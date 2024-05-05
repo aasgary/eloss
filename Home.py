@@ -2,7 +2,6 @@
 import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
-import folium  # Import folium for mapping
 
 # Function to convert lat/lon to the coordinate system of the raster
 def latlon_to_xy(lat, lon, dataset):
