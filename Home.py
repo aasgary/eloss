@@ -28,15 +28,7 @@ def get_raster_value(lat, lon, raster_path):
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
-# Function to display the map with the marked location
-def show_map(lat, lon):
-    m = folium.Map(location=[lat, lon], zoom_start=13)  # Create a map centered around the coordinates
-    folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)  # Add a marker for the location
-    return m
 
-raster_path = 'canadapga4753min.tif'
-latitude = 56.23
-longitude = -117.29
 
 value = get_raster_value(latitude, longitude, raster_path)
 print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
