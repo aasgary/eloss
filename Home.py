@@ -1,3 +1,4 @@
+import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
 import folium  # Import folium for mapping
