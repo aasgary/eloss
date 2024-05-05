@@ -36,7 +36,7 @@ def show_map(lat, lon):
     folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)  # Add a marker for the location
     return m
 
-raster_path = 'raster_path = 'https://drive.google.com/uc?export=download&id=1TXBKnsp7hbIChr8UWzqEgFq5QhP58YYs'
+raster_path = 'https://drive.google.com/uc?export=download&id=1TXBKnsp7hbIChr8UWzqEgFq5QhP58YYs'
 latitude = 46.23
 longitude = -130.29
 
