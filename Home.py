@@ -16,9 +16,8 @@ def get_raster_value(lat, lon, raster_path):
     try:
         with rasterio.open(raster_path) as dataset:
             print(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
-            st.write(f"Raster CRS: {dataset.crs}")
-            st.write(f"Width: {dataset.width}, Height: {dataset.height}")
-            st.write(f"Row: {row}, Col: {col}")
+            print(f"Raster CRS: {dataset.crs}")
+            print(f"Row: {row}, Col: {col}")
             x, y = latlon_to_xy(lat, lon, dataset)
             row, col = dataset.index(x, y)
             print(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
@@ -34,6 +33,7 @@ def get_raster_value(lat, lon, raster_path):
 raster_path = 'https://drive.google.com/uc?export=download&id=1TXBKnsp7hbIChr8UWzqEgFq5QhP58YYs'
 latitude = 46.23
 longitude = -130.29
+
 
 value = get_raster_value(latitude, longitude, raster_path)
 print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
