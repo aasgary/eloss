@@ -55,8 +55,8 @@ selected_flood_type = st.selectbox("Select a Flood Type:", list(flood_rasters.ke
 raster_path = flood_rasters[selected_flood_type]
 
 # User inputs for latitude and longitude
-latitude = st.number_input("Enter latitude:", value=45.62298452259461)
-longitude = st.number_input("Enter longitude:", value=-61.99323924873502)
+latitude = st.number_input("Enter latitude:", value=44.379464761031706)
+longitude = st.number_input("Enter longitude:", value=-64.51932009800133)
 
 if st.button('Get Raster Value and Show Location'):
     value = get_raster_value(latitude, longitude, raster_path)
