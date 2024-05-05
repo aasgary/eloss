@@ -12,12 +12,13 @@ def latlon_to_xy(lat, lon, dataset):
     return x, y
 
 # Function to get the raster value at a specific lat/lon
+# Function to get the raster value at a specific lat/lon
 def get_raster_value(lat, lon, raster_path):
     try:
         with rasterio.open(raster_path) as dataset:
-            print(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
             print(f"Raster CRS: {dataset.crs}")
-            print(f"Row: {row}, Col: {col}")
+            print(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
+
             x, y = latlon_to_xy(lat, lon, dataset)
             row, col = dataset.index(x, y)
             print(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
