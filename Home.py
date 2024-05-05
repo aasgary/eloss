@@ -12,13 +12,15 @@ def latlon_to_xy(lat, lon, dataset):
 
 import rasterio
 
+import rasterio
+
 # Correctly format the URL with /vsicurl/ if confirmed it's direct
 def get_raster_value(lat, lon, raster_url):
     try:
         # Ensure URL is correctly prefixed for rasterio's remote capabilities
         raster_url_corrected = f'/vsicurl/{raster_url}'
         with rasterio.open(raster_url_corrected) as dataset:
-            print(f"Raster CRS: {dataset.crs  
+            print(f"Raster CRS: {dataset.crs}")
             print(f"Width: {dataset.width}, Height: {dataset.height}")
 
             x, y = latlon_to_xy(lat, lon, dataset)
@@ -32,6 +34,9 @@ def get_raster_value(lat, lon, raster_url):
                 return "Latitude and Longitude are out of the raster bounds."
     except Exception as e:
         return f"An error occurred: {str(e)}"
+
+# Adjust your usage accordingly
+
 
 # Adjust your usage accordingly
 
