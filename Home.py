@@ -1,7 +1,6 @@
-
-import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
+import folium  # Import folium for mapping
 
 # Function to convert lat/lon to the coordinate system of the raster
 def latlon_to_xy(lat, lon, dataset):
@@ -28,19 +27,20 @@ def get_raster_value(lat, lon, raster_path):
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
+# Function to display the map with the marked location
+def show_map(lat, lon):
+    m = folium.Map(location=[lat, lon], zoom_start=13)  # Create a map centered around the coordinates
+    folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)  # Add a marker for the location
+    return m
 
+raster_path = 'canadapga4753min.tif'
+latitude = 46.23
+longitude = -130.29
 
+value = get_raster_value(latitude, longitude, raster_path)
+print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
 
+# Show the map with the location
+map_display = show_map(latitude, longitude)
+map_display  # Display the map in the output cell
 
-# Streamlit interface setup
-st.title("Raster Value and Location Viewer")
-raster_path = st.text_input("Enter the path to the raster file:", 'https://drive.google.com/file/d/1D2pASBmz3Q06d0vzY4o0cowRorTKqr-f/view?usp=drive_link')
-latitude = st.number_input("Enter latitude:", value=45.79)
-longitude = st.number_input("Enter longitude:", value=-74.0)
-if st.button('Get Raster Value and Show Location'):
-    value = get_raster_value(latitude, longitude, raster_path)
-    if isinstance(value, str):
-        st.error(value)
-    else:
-        st.success(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
-        show_location_on_map(latitude, longitude)
