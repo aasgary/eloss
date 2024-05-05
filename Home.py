@@ -2,7 +2,7 @@ import streamlit as st
 import pydeck as pdk
 import rasterio
 from rasterio.transform import from_origin
-from pyproj import Proj, Transformer
+#from pyproj import Proj, Transformer
 
 # Function to get the raster value at a specific lat/lon
 def get_raster_value(lat, lon, raster_path):
