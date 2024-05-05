@@ -33,7 +33,7 @@ def get_raster_value(lat, lon, raster_path):
 
 raster_path = 'https://drive.google.com/uc?export=download&id=1TXBKnsp7hbIChr8UWzqEgFq5QhP58YYs'
 latitude = 46.23
-longitude = -130.29
+longitude = -120.29
 
 
 value = get_raster_value(latitude, longitude, raster_path)
