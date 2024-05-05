@@ -53,7 +53,7 @@ def show_location_on_map(lat, lon):
 
 # Streamlit interface setup
 st.title("Raster Value and Location Viewer")
-raster_path = st.text_input("Enter the path to the raster file:", 'path_to_your_raster_file.tif')
+raster_path = st.text_input("Enter the path to the raster file:", 'https://huggingface.co/datasets/aasgary/floods/raw/main/canada_v2023_1_pga_475_rock_3min.tif')
 latitude = st.number_input("Enter latitude:", value=56.23)
 longitude = st.number_input("Enter longitude:", value=-117.29)
 
