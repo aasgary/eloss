@@ -83,7 +83,7 @@ st.title("Raster Value and Location Viewer")
 raster_path = st.text_input("Enter the path to the raster file:", 'https://drive.google.com/file/d/1D2pASBmz3Q06d0vzY4o0cowRorTKqr-f/view?usp=sharing')
 latitude = st.number_input("Enter latitude:", value=45.79)
 longitude = st.number_input("Enter longitude:", value=-74.0)
-
+tiffinfo raster_path
 if st.button('Get Raster Value and Show Location'):
     value = get_raster_value(latitude, longitude, raster_path)
     if isinstance(value, str):
