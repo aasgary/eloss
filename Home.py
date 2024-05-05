@@ -4,7 +4,30 @@ import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
 
+# Function to convert lat/lon to the coordinate system of the raster
+def latlon_to_xy(lat, lon, dataset):
+    transformer = Transformer.from_crs("epsg:4326", dataset.crs, always_xy=True)
+    x, y = transformer.transform(lon, lat)
+    return x, y
 
+# Function to get the raster value at a specific lat/lon
+def get_raster_value(lat, lon, raster_path):
+    try:
+        with rasterio.open(raster_path) as dataset:
+            print(f"Raster CRS: {dataset.crs}")
+            print(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
+
+            x, y = latlon_to_xy(lat, lon, dataset)
+            row, col = dataset.index(x, y)
+            print(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
+
+            if (row >= 0 and row < dataset.height) and (col >= 0 and col < dataset.width):
+                value = dataset.read(1)[row, col]
+                return value
+            else:
+                return "Latitude and Longitude are out of the raster bounds."
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
 # Correctly format the URL with /vsicurl/ if confirmed it's direct
 def get_raster_value(lat, lon, raster_url):
