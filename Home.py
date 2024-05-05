@@ -4,40 +4,39 @@ import rasterio
 from rasterio.transform import from_origin
 from pyproj import Proj, Transformer
 
-# Function to convert lat/lon to the coordinate system of the raster
-def latlon_to_xy(lat, lon, dataset):
-    transformer = Transformer.from_crs("epsg:4326", dataset.crs, always_xy=True)
-    x, y = transformer.transform(lon, lat)
-    return x, y
+# Use the raw GitHub URL directly
 
-# Function to get the raster value at a specific lat/lon
-def get_raster_value(lat, lon, raster_path):
+tif_url = 'https://raw.githubusercontent.com/username/repository/branch/filename.tif'
+
+def get_raster_value(lat, lon, raster_url):
     try:
-        with rasterio.open(raster_path) as dataset:
+        # Use rasterio to open the remote file via HTTP
+        with rasterio.open(raster_url) as dataset:
             st.write(f"Raster CRS: {dataset.crs}")
-            st.write(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
-
+            st.write(f"Width: {dataset.width}, Height: {dataset.height}")
+            
+            # Assuming you have a function to convert lat/lon to raster coordinates
+            # This should also handle any coordinate reference system transformations
             x, y = latlon_to_xy(lat, lon, dataset)
             row, col = dataset.index(x, y)
-            st.write(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
+            st.write(f"Row: {row}, Col: {col}")
 
-            # Corrected the syntax error here:
-            if (row >= 0 and row < dataset.height) and (col >= 0 and col < dataset.width):
+            # Ensure coordinates are within the image bounds
+            if 0 <= row < dataset.height and 0 <= col < dataset.width:
+                # Read the value from the raster
                 value = dataset.read(1)[row, col]
-                return value
+                return f"The pixel value at latitude {latitude} and longitude {longitude} is {value}"
             else:
                 return "Latitude and Longitude are out of the raster bounds."
     except Exception as e:
         return f"An error occurred: {str(e)}"
+# Streamlit interface setup
+latitude = st.number_input("Enter latitude:", value=56.23)
+longitude = st.number_input("Enter longitude:", value=-117.29)
+if st.button('Get Raster Value'):
+    result = get_raster_value(latitude, longitude, tif_url)
+    st.write(result)
 
-
-# Streamlit widgets to accept inputs
-st.title("Raster Value Extraction Tool")
-raster_path = st.text_input("Enter the path to the raster file:", 'https://github.com/aasgary/eloss/blob/82d7f67ebfcbae3de6504374a65aa7063a45e482/canadapga4753min.tif')
-latitude = st.number_input("Enter the latitude:", value=56.23)
-longitude = st.number_input("Enter the longitude:", value=-117.29)
-
-# Button to trigger raster value reading
 if st.button('Get Raster Value'):
     value = get_raster_value(latitude, longitude, raster_path)
     st.write(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
