@@ -1,11 +1,7 @@
 import rasterio
-from rasterio.plot import show
-from pyproj import Transformer
-import folium
-from folium import plugins
-import matplotlib.pyplot as plt
-from io import BytesIO
-import numpy as np
+from rasterio.transform import from_origin
+from pyproj import Proj, Transformer
+import folium  # Import folium for mapping
 
 # Function to convert lat/lon to the coordinate system of the raster
 def latlon_to_xy(lat, lon, dataset):
@@ -18,11 +14,11 @@ def get_raster_value(lat, lon, raster_path):
     try:
         with rasterio.open(raster_path) as dataset:
             print(f"Raster CRS: {dataset.crs}")
-            print(f"Width: {dataset.width}, Height: {dataset.height}")
+            print(f"Width: {dataset.width}, Height: {dataset.height}")  # Check raster dimensions
 
             x, y = latlon_to_xy(lat, lon, dataset)
             row, col = dataset.index(x, y)
-            print(f"Row: {row}, Col: {col}")
+            print(f"Row: {row}, Col: {col}")  # Output row and col to check bounds
 
             if (row >= 0 and row < dataset.height) and (col >= 0 and col < dataset.width):
                 value = dataset.read(1)[row, col]
@@ -32,34 +28,10 @@ def get_raster_value(lat, lon, raster_path):
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
-# Function to display the map with the marked location and raster overlay
-def show_map(lat, lon, raster_path):
-    m = folium.Map(location=[lat, lon], zoom_start=8)
-    folium.Marker([lat, lon]).add_to(m)
-
-    # Open the raster file and read the first band
-    with rasterio.open(raster_path) as src:
-        # Convert the raster data to an image
-        fig, ax = plt.subplots()
-        show(src, ax=ax)
-        ax.set_title('Raster Overlay')
-        ax.axis('off')
-        img = BytesIO()
-        plt.savefig(img, format='png', bbox_inches='tight', pad_inches=0)
-        img.seek(0)
-        plt.close()
-
-        # Create an ImageOverlay
-        bounds = [[src.bounds.bottom, src.bounds.left], [src.bounds.top, src.bounds.right]]
-        folium.raster_layers.ImageOverlay(
-            image=img,
-            bounds=bounds,
-            opacity=0.6,
-            interactive=True,
-            cross_origin=False,
-            zindex=1,
-        ).add_to(m)
-
+# Function to display the map with the marked location
+def show_map(lat, lon):
+    m = folium.Map(location=[lat, lon], zoom_start=13)  # Create a map centered around the coordinates
+    folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)  # Add a marker for the location
     return m
 
 raster_path = 'canadapga4753min.tif'
@@ -69,6 +41,6 @@ longitude = -117.29
 value = get_raster_value(latitude, longitude, raster_path)
 print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
 
-# Show the map with the location and raster overlay
-map_display = show_map(latitude, longitude, raster_path)
+# Show the map with the location
+map_display = show_map(latitude, longitude)
 map_display  # Display the map in the output cell
