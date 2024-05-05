@@ -6,7 +6,7 @@ from pyproj import Proj, Transformer
 
 # Use the raw GitHub URL directly
 
-tif_url = 'https://raw.githubusercontent.com/username/repository/branch/filename.tif'
+tif_url = 'https://github.com/aasgary/eloss/blob/5e06cffb934252e7a2ca996ae6d49e14b97c9aaa/canadapga4753min.tif'
 
 def get_raster_value(lat, lon, raster_url):
     try:
