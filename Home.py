@@ -33,7 +33,7 @@ def show_map(lat, lon):
     folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)  # Add a marker for the location
     return m
 
-raster_path = 'canadapga4753min.tif'
+raster_path = 'https://drive.google.com/file/d/1TXBKnsp7hbIChr8UWzqEgFq5QhP58YYs/view?usp=drive_link'
 latitude = 46.23
 longitude = -130.29
 
@@ -41,6 +41,6 @@ value = get_raster_value(latitude, longitude, raster_path)
 print(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
 
 # Show the map with the location
-map_display = show_map(latitude, longitude)
-map_display  # Display the map in the output cell
+# map_display = show_map(latitude, longitude)
+# map_display  # Display the map in the output cell
 
