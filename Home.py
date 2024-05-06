@@ -42,7 +42,7 @@ def show_map(lat, lon):
 markdown = """
 A Streamlit map template
 <https://github.com/opengeos/streamlit-map-template>
-
+"""
 # Streamlit app setup
 st.title("Flood Value and Location Viewer")
 st.sidebar.title("About")
