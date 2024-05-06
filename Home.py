@@ -49,7 +49,7 @@ def show_map(lat, lon):
     return m
 
 # Streamlit interface setup
-st.title("Raster Value and Location Viewer")
+st.title("Flood Value and Location Viewer")
 
 # Dropdown menu to select the flood type
 selected_flood_type = st.selectbox("Select a Flood Type:", list(flood_rasters.keys()))
@@ -60,19 +60,6 @@ raster_path = flood_rasters[selected_flood_type]
 # User inputs for latitude and longitude
 latitude = st.number_input("Enter latitude:", value=44.379464761031706)
 longitude = st.number_input("Enter longitude:", value=-64.51932009800133)
-
-if st.button('Get Raster Value and Show Location'):
-    value = get_raster_value(latitude, longitude, raster_path)
-    if isinstance(value, str):
-        st.error(value)
-    else:
-        st.success(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
-        map_display = show_map(latitude, longitude)
-        map_html = map_display._repr_html_()
-        st.components.v1.html(map_html, height=500)
-
-        map_html = map_display._repr_html_()
-        st.components.v1.html(map_html, height=500)
 
 st.title("Interactive Map")
 
@@ -90,5 +77,20 @@ with col1:
     m = leafmap.Map(
         locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
     )
-    m.add_basemap(basemap)
-    m.to_streamlit(height=700)
+
+if st.button('Get Raster Value and Show Location'):
+    value = get_raster_value(latitude, longitude, raster_path)
+    if isinstance(value, str):
+        st.error(value)
+    else:
+        st.success(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
+        map_display = show_map(latitude, longitude)
+        map_html = map_display._repr_html_()
+        st.components.v1.html(map_html, height=500)
+
+        map_html = map_display._repr_html_()
+        st.components.v1.html(map_html, height=500)
+        map_html.add_basemap(basemap)
+        map_html.to_streamlit(height=700)
+
+
