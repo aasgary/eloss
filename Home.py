@@ -42,6 +42,10 @@ def show_map(lat, lon):
 
 # Streamlit app setup
 st.title("Flood Value and Location Viewer")
+st.sidebar.title("About")
+st.sidebar.info(markdown)
+logo = "https://i.imgur.com/UbOXYAU.png"
+st.sidebar.image(logo)
 
 # Dropdown menu for flood type
 selected_flood_type = st.selectbox("Select a Flood Type:", list(flood_rasters.keys()))
