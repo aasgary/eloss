@@ -51,4 +51,4 @@ if st.button('Get Flood Level Values and Show Location'):
         map_display = show_map(latitude, longitude)
         map_html = map_display._repr_html_()
         print(map_html)  # Check what is actually in map_html
-        st.components.v1.html(map_html, height=500)
+        #st.components.v1.html(map_html, height=500)
