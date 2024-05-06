@@ -40,17 +40,17 @@ def show_map(lat, lon):
     folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)
     return m
 
-markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
-"""
+#markdown = """
+#A Streamlit map template
+#<https://github.com/opengeos/streamlit-map-template>
+#"""
 
 # Streamlit app setup
 st.title("Flood Value and Location Viewer")
 st.sidebar.title("About")
-st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
-st.sidebar.image(logo)
+#st.sidebar.info(markdown)
+#logo = "https://i.imgur.com/UbOXYAU.png"
+#st.sidebar.image(logo)
 
 # Dropdown menu for flood type
 selected_flood_type = st.selectbox("Select a Flood Type:", list(flood_rasters.keys()))
