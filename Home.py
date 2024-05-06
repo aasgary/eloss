@@ -52,9 +52,6 @@ raster_path = flood_rasters[selected_flood_type]
 latitude = st.number_input("Enter latitude:", value=44.379464761031706)
 longitude = st.number_input("Enter longitude:", value=-64.51932009800133)
 
-
-
-if st.button('Get Raster Value and Show Location'):
 if st.button('Get Flood Level Value and Show Location'):
     value = get_raster_value(latitude, longitude, raster_path)
     if isinstance(value, str):
