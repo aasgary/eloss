@@ -52,13 +52,5 @@ if st.button('Get Flood Level Values and Show Location'):
         map_display = show_map(latitude, longitude)
         map_html = map_display._repr_html_()
         print(map_html)  # Check what is actually in map_html  
-        
-    try:
-        map_display = show_map(latitude, longitude)
-        map_html = map_display._repr_html_()
         st.html(map_html, height=500)
-    except AttributeError as e:
-        st.error("Streamlit components module is missing 'html': " + str(e))
-    except Exception as e:
-        st.error("Failed to display the map: " + str(e))
-
+    
