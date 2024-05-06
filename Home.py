@@ -2,7 +2,7 @@ import streamlit as st
 import rasterio
 from pyproj import Proj, Transformer
 import folium
-
+import leafmap.foliumap as leafmap
 # Define the flood types and their corresponding raster paths
 
 flood_rasters = {
