@@ -39,10 +39,7 @@ def show_map(lat, lon):
     m = folium.Map(location=[lat, lon], zoom_start=13)
     folium.Marker([lat, lon], tooltip='Click me!', popup='Coordinates').add_to(m)
     return m
-markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
-"""
+
 # Streamlit app setup
 st.title("Flood Value and Location Viewer")
 st.sidebar.title("About")
