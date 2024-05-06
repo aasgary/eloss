@@ -62,7 +62,7 @@ longitude = st.number_input("Enter longitude:", value=-64.51932009800133)
 
 
 
-if st.button('Get Raster Value and Show Location'):
+if st.button('Get Flood Level Value and Show Location'):
     value = get_raster_value(latitude, longitude, raster_path)
     if isinstance(value, str):
         st.error(value)
