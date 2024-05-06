@@ -90,7 +90,7 @@ if st.button('Get Raster Value and Show Location'):
 
         map_html = map_display._repr_html_()
         st.components.v1.html(map_html, height=500)
-        map_html.add_basemap(basemap)
+        # map_html.add_basemap(basemap)
         # map_html.to_streamlit(height=700)
 
 
