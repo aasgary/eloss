@@ -67,7 +67,7 @@ if st.button('Get Flood Level Value and Show Location'):
     if isinstance(value, str):
         st.error(value)
     else:
-        st.success(f"The pixel value at latitude {latitude} and longitude {longitude} is {value}")
+        st.success(f"The flood level value at latitude {latitude} and longitude {longitude} is {value}")
         map_display = show_map(latitude, longitude)
         map_html = map_display._repr_html_()
         st.components.v1.html(map_html, height=500)  # Display only once
