@@ -52,10 +52,10 @@ latitude = st.number_input("Enter latitude:", value=44.379464761031706)
 longitude = st.number_input("Enter longitude:", value=-64.51932009800133)
 
 # Leafmap setup
-st.title("Interactive Map")
-basemap = st.selectbox("Select a basemap:", options=list(leafmap.basemaps.keys()), index=0)
-m = leafmap.Map(locate_control=True, latlon_control=True, draw_export=True, minimap_control=True)
-m.to_streamlit(height=700)
+#st.title("Interactive Map")
+#basemap = st.selectbox("Select a basemap:", options=list(leafmap.basemaps.keys()), index=0)
+#m = leafmap.Map(locate_control=True, latlon_control=True, draw_export=True, minimap_control=True)
+#m.to_streamlit(height=700)
 
 if st.button('Get Raster Value and Show Location'):
     value = get_raster_value(latitude, longitude, raster_path)
