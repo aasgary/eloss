@@ -21,7 +21,7 @@ with st.expander("See source code"):
         m = leafmap.Map()
 
         # Define your WMS or tile layer URLs
-        left_raster_url = "https://drive.google.com/uc?export=download&id=1iLEuzYRML8Kb9qrPnXZppEuQS0D-68gy"
+        left_raster_url = "https://drive.google.com/file/d/18jUhSQhjEpdRGibaDDhUNWM0ZqiZnn3g/view?usp=drive_link"
         right_raster_url = "https://drive.google.com/uc?export=download&id=1z0ilA-WhpXa7-GhbC0jzGQiEiUS2yBXL"
        
         # Using custom rasters in the split map
