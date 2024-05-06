@@ -17,7 +17,7 @@ st.title("Heatmap")
 
 with st.expander("See source code"):
     with st.echo():
-        filepath = "Flood 25": "https://drive.google.com/uc?export=download&id=19KKEq3nBojsISfy36CAoLXTwXXnkU3gW"
+        filepath = "https://drive.google.com/uc?export=download&id=19KKEq3nBojsISfy36CAoLXTwXXnkU3gW"
         m = leafmap.Map(center=[40, -100], zoom=4)
         m.add_heatmap(
             filepath,
