@@ -8,8 +8,15 @@ from geopy.geocoders import Nominatim
 # Initialize the geolocator
 geolocator = Nominatim(user_agent="geoapiExercises")
 
-# Flood_rasters dictionary (already defined)
-
+# Flood_rasters dictionary 
+flood_rasters = {
+    "Flood 25": "https://drive.google.com/uc?export=download&id=1iLEuzYRML8Kb9qrPnXZppEuQS0D-68gy",
+    "Flood 50": "https://drive.google.com/uc?export=download&id=1z0ilA-WhpXa7-GhbC0jzGQiEiUS2yBXL",
+    "Flood 100": "https://drive.google.com/uc?export=download&id=1Z8pIbnNmz7fpH0Ecm2wqU8ayUo5Zf4E_",
+    "Flood 150": "https://drive.google.com/uc?export=download&id=18RcZJlZzvgc_cL1vKR1B6-9Ex3_xfV0-",
+    "Flood 200": "https://drive.google.com/uc?export=download&id=16yAjxqvui4fNgcdzRZyzto3Q2B94J_qU",
+   
+}
 # Function to convert lat/lon to the coordinate system of the raster
 def latlon_to_xy(lat, lon, dataset):
     transformer = Transformer.from_crs("epsg:4326", dataset.crs, always_xy=True)
