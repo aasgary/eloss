@@ -50,4 +50,4 @@ if st.button('Get Flood Level Values and Show Location'):
             st.write(f"{flood_type}: {value}")
         map_display = show_map(latitude, longitude)
         map_html = map_display._repr_html_()
-        st.components.v1.html(map_html, height=500)
+        #st.components.v1.html(map_html, height=500)
