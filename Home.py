@@ -39,7 +39,7 @@ def show_map(lat, lon):
 st.title("Flood Value and Location Viewer")
 
 # User input for address
-address = st.text_input("Enter an address:")
+address = st.text_input("6299 South St, Halifax, NS B3H 4R2")
 
 # Dropdown menu for flood type
 selected_flood_type = st.selectbox("Select a Flood Type:", list(flood_rasters.keys()))
