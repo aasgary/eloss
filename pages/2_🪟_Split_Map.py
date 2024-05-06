@@ -17,10 +17,22 @@ st.title("Split-panel Map")
 
 with st.expander("See source code"):
     with st.echo():
+        # Initialize the map
         m = leafmap.Map()
+
+        # Define your WMS or tile layer URLs
+        left_raster_url = "https://drive.google.com/file/d/1919VoHnlX7pnG8F8mVXhOe3NLCPezw_Z/view?usp=drive_link"
+        right_raster_url = "https://drive.google.com/file/d/1iLEuzYRML8Kb9qrPnXZppEuQS0D-68gy/view?usp=drive_link"
+
+        # Using custom rasters in the split map
         m.split_map(
-            left_layer="ESA WorldCover 2020 S2 FCC", right_layer="ESA WorldCover 2020"
+            left_layer=left_raster_url, 
+            right_layer=right_raster_url,
+            left_name="Custom Left Layer",  # Optionally name your layers
+            right_name="Custom Right Layer"
         )
-        m.add_legend(title="ESA Land Cover", builtin_legend="ESA_WorldCover")
+
+        # Add legends or other map components as necessary
+        m.add_legend(title="Custom Layer Legend", builtin_legend="ESA_WorldCover")
 
 m.to_streamlit(height=700)
