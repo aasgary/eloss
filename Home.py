@@ -2,6 +2,7 @@ import streamlit as st
 import rasterio
 from pyproj import Proj, Transformer
 import folium
+import streamlit.components as components
 
 # Flood_rasters dictionary
 flood_rasters = {
@@ -50,12 +51,14 @@ if st.button('Get Flood Level Values and Show Location'):
             st.write(f"{flood_type}: {value}")
         map_display = show_map(latitude, longitude)
         map_html = map_display._repr_html_()
-        print(map_html)  # Check what is actually in map_html
+        print(map_html)  # Check what is actually in map_html  
         
     try:
-        map_html = show_map(latitude, longitude)
-        st.components.v1.html(map_html, height=500)
+        map_display = show_map(latitude, longitude)
+        map_html = map_display._repr_html_()
+        st.html(map_html, height=500)
+    except AttributeError as e:
+        st.error("Streamlit components module is missing 'html': " + str(e))
     except Exception as e:
-        st.error(f"Failed to display the map: {str(e)}")
+        st.error("Failed to display the map: " + str(e))
 
-        #st.components.html(map_html, height=500)
